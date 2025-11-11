@@ -213,7 +213,7 @@ public class TiendaUI {
         printInfo("buscar_categoria     → Buscar productos por categoría");
         printInfo("listar               → Mostrar todos los productos");
         printInfo("vendedores           → Mostrar todos los vendedores");
-        printInfo("precio_max           → Buscar productos de precio inferior");
+        printInfo("precio_max           → Buscar productos con tope de precio");
         printInfo("salir                → Salir del programa");
     }
 

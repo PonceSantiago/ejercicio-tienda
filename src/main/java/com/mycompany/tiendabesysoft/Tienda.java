@@ -95,7 +95,7 @@ public class Tienda {
   
   public void almacenarProducto(Producto producto) throws ProductoDuplicadoException{
           for(Producto p:this.productos){
-          if(p.getCodigo().equalsIgnoreCase(p.getCodigo()))
+          if(p.getCodigo().equalsIgnoreCase(producto.getCodigo()))
               throw new ProductoDuplicadoException();
       }
       this.productos.add(producto);
