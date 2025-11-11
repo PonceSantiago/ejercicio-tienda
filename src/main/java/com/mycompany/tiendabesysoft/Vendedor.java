@@ -16,7 +16,10 @@ public class Vendedor {
     private String codigo;
     private ArrayList<Venta> ventas;
     
-    public Vendedor(String nombre, Float sueldo, String codigo) {
+    public Vendedor(String nombre, Float sueldo, String codigo) throws InvalidDataException {
+        if(nombre.isEmpty()||sueldo<0||codigo.isEmpty())
+            throw new InvalidDataException();
+        
         this.nombre = nombre;
         this.sueldo = sueldo;
         this.codigo = codigo;

@@ -9,10 +9,14 @@ package ui;
  *
  * @author Ponce Santiago
  */
+import com.mycompany.tiendabesysoft.InvalidDataException;
+import com.mycompany.tiendabesysoft.InvalidProductDataException;
+import com.mycompany.tiendabesysoft.ProductNotFoundException;
 import com.mycompany.tiendabesysoft.Producto;
 import com.mycompany.tiendabesysoft.Tienda;
 import com.mycompany.tiendabesysoft.TiendaBesysoft;
 import com.mycompany.tiendabesysoft.Vendedor;
+import com.mycompany.tiendabesysoft.VendedorNotFoundException;
 
 import java.io.IOException;
 import org.jline.utils.AttributedString;
@@ -40,7 +44,7 @@ public class TiendaUI {
 
         Completer completer = new StringsCompleter(
                 "registrar_producto", "registrar_vendedor", "registrar_venta",
-                "comisiones", "buscar_categoria", "listar", "ayuda", "salir"
+                "comisiones", "buscar_categoria","buscar_por_precio_maximo", "listar", "ayuda", "salir"
         );
 
         this.reader = LineReaderBuilder.builder()
@@ -90,32 +94,48 @@ public class TiendaUI {
     }
 
     private void registrarProducto() {
-        printTitulo("Registrar producto");
-        String codigo = reader.readLine("Código: ");
-        String nombre = reader.readLine("Nombre: ");
-        Float precio = Float.valueOf(reader.readLine("Precio: "));
-        String categoria = reader.readLine("Categoría: ");
-
-        tienda.almacenarProducto(new Producto(nombre,precio , categoria, codigo));
-        printOk("Producto agregado correctamente.");
+        try {
+            printTitulo("Registrar producto");
+            String codigo = reader.readLine("Código: ");
+            String nombre = reader.readLine("Nombre: ");
+            Float precio = Float.valueOf(reader.readLine("Precio: "));
+            String categoria = reader.readLine("Categoría: ");
+            
+            tienda.almacenarProducto(new Producto(nombre,precio , categoria, codigo));
+            printOk("Producto agregado correctamente.");
+        } catch (InvalidProductDataException ex) {
+              printError("Error: " + ex.getMessage());
+        }
     }
 
     private void registrarVendedor() {
-        printTitulo("Registrar vendedor");
-        String codigo = reader.readLine("Código: ");
-        String nombre = reader.readLine("Nombre: ");
-        Float sueldo = Float.valueOf(reader.readLine("Sueldo: "));
-
-        tienda.agregarVendedor(new Vendedor(nombre, sueldo,codigo));
-        printOk("Vendedor registrado.");
+        try {
+            printTitulo("Registrar vendedor");
+            String codigo = reader.readLine("Código: ");
+            String nombre = reader.readLine("Nombre: ");
+            Float sueldo = Float.valueOf(reader.readLine("Sueldo: "));
+            
+            tienda.agregarVendedor(new Vendedor(nombre, sueldo,codigo));
+            printOk("Vendedor registrado.");
+        } catch (InvalidDataException ex) {
+              printError("Error: " + ex.getMessage());
+        }
     }
 
     private void registrarVenta() {
-        printTitulo("Registrar venta");
-       // String codVend = reader.readLine("Código vendedor: ");
-       // String codProd = reader.readLine("Código producto: ");
-       // tienda.registrarVenta(producto, vendedor);
-        printOk("Venta registrada.");
+        try {
+            printTitulo("Registrar venta");
+            String codVend = reader.readLine("Código vendedor: ");
+            String codProd = reader.readLine("Código producto: ");
+            
+            Producto producto = tienda.buscarProductoPorCodigo(codProd);
+            Vendedor vendedor = tienda.buscarVendedorPorCodigo(codVend);
+            
+            tienda.registrarVenta(producto, vendedor);
+            printOk("Venta registrada.");
+        } catch (ProductNotFoundException | VendedorNotFoundException | EndOfFileException | UserInterruptException ex) {
+              printError("Error: " + ex.getMessage());
+        }
     }
 
     private void mostrarComisiones() {
@@ -133,7 +153,7 @@ public class TiendaUI {
     private void buscarPorCategoria() {
         printTitulo("Buscar productos por categoría");
         String categoria = reader.readLine("Categoría: ");
-        List<Producto> resultados = tienda.getProductosPorCategoria(categoria);
+        List<Producto> resultados = tienda.buscarProductosPorCategoria(categoria);
 
         if (resultados.isEmpty()) {
             printInfo("No se encontraron productos.");

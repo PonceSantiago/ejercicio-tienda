@@ -48,7 +48,7 @@ public class Tienda {
         this.vendedores = vendedores;
     }
     
-  public ArrayList<Producto> getProductosPorCategoria(String categoria) {
+  public ArrayList<Producto> buscarProductosPorCategoria(String categoria) {
          ArrayList<Producto> productosFiltrados = new ArrayList<>();
          
          this.productos.forEach((producto) -> {
@@ -59,7 +59,7 @@ public class Tienda {
          return productosFiltrados;
     }    
   
-    public ArrayList<Producto> getProductosPorPrecioMaximo(Float precioMaximo) {
+    public ArrayList<Producto> buscarProductosPorPrecioMaximo(Float precioMaximo) {
          ArrayList<Producto> productosFiltrados = new ArrayList<>();
          
          this.productos.forEach((producto) -> {
@@ -70,6 +70,14 @@ public class Tienda {
          return productosFiltrados;
     }    
   
+     public Producto buscarProductoPorCodigo(String codigoProducto) throws ProductNotFoundException {
+        for(Producto producto : this.productos) {
+            if(producto.getCodigo().equals(codigoProducto))
+                return producto;
+        }
+        
+        throw new ProductNotFoundException();
+    }    
    
   
  public  Map<Vendedor, Double>calcularComisiones(){
@@ -94,5 +102,15 @@ public class Tienda {
       Venta venta = new Venta(producto, vendedor);
       vendedor.registrarVenta(venta);
   }
+
+    public Vendedor buscarVendedorPorCodigo(String codVend) throws VendedorNotFoundException {
+            
+        for(Vendedor vendedor : this.vendedores) {
+            if(vendedor.getCodigo().equals(codVend))
+                return vendedor;
+        }
+        
+        throw new VendedorNotFoundException();
+    }
         
 }

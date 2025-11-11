@@ -14,7 +14,10 @@ public class Producto {
     private String categoria;
     private String codigo;
 
-    public Producto(String nombre, Float precio, String categoria, String codigo) {
+    public Producto(String nombre, Float precio, String categoria, String codigo) throws InvalidProductDataException {
+        if(precio<0 ||nombre.isEmpty()||categoria.isEmpty()||codigo.isEmpty())
+            throw new InvalidProductDataException();
+        
         this.nombre = nombre;
         this.precio = precio;
         this.categoria = categoria;

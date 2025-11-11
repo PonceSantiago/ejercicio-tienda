@@ -14,7 +14,7 @@ import ui.TiendaUI;
  */
 public class TiendaBesysoft {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InvalidDataException, InvalidProductDataException {
         
         
        Tienda tienda = new Tienda();
