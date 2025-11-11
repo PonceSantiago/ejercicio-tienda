@@ -26,6 +26,7 @@ public class Tienda {
     public Tienda() {
         this.vendedores = new ArrayList<>();
         this.productos = new ArrayList<>();
+        this.calculadoraComision = new CalculadoraComisionDefault();
     }
     
     
