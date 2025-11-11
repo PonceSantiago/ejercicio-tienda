@@ -10,4 +10,14 @@
         <maven.compiler.release>24</maven.compiler.release>
         <exec.mainClass>com.mycompany.tiendabesysoft.TiendaBesysoft</exec.mainClass>
     </properties>
+    
+    <dependencies>
+        <dependency>
+            <groupId>org.jline</groupId>
+            <artifactId>jline</artifactId>
+            <version>3.24.1</version>
+            <type>jar</type>
+        </dependency>
+    </dependencies>
+    
 </project>

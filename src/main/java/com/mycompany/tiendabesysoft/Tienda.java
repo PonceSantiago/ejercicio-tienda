@@ -5,14 +5,29 @@
 package com.mycompany.tiendabesysoft;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
  * @author Santiago Ponce
  */
 public class Tienda {
-    private ArrayList<Vendedor> vendedores = new ArrayList();
-    private ArrayList<Producto> productos = new ArrayList();
+    private ArrayList<Vendedor> vendedores;
+    private ArrayList<Producto> productos;
+
+    public Tienda(ArrayList<Vendedor> vendedores, ArrayList<Producto> productos) {
+        this.vendedores = vendedores;
+        this.productos = productos;
+    }
+
+    public Tienda() {
+        this.vendedores = new ArrayList<>();
+        this.productos = new ArrayList<>();
+    }
+    
+    
+   
 
     public ArrayList<Producto> getProductos() {
         return productos;
@@ -60,6 +75,16 @@ public class Tienda {
       return comision;
           
   }
+  
+ public  Map<Vendedor, Double>calcularComisiones(){
+     Map<Vendedor, Double> comisiones = new HashMap<>();
+     for(Vendedor vendedor : this.vendedores){
+         comisiones.put(vendedor, calcularComision(vendedor));
+     }
+     return comisiones;
+ }
+      
+  
   
   public void almacenarProducto(Producto producto){
       this.productos.add(producto);
