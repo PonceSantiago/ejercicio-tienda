@@ -6,7 +6,7 @@ package com.mycompany.tiendabesysoft;
 
 /**
  *
- * @author santiago
+ * @author santiago ponce
  */
 public class Producto {
     private String nombre;

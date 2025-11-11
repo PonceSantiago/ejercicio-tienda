@@ -15,10 +15,12 @@ import java.util.Map;
 public class Tienda {
     private ArrayList<Vendedor> vendedores;
     private ArrayList<Producto> productos;
+    private CalculadoraDeComision calculadoraComision;
 
-    public Tienda(ArrayList<Vendedor> vendedores, ArrayList<Producto> productos) {
+    public Tienda(ArrayList<Vendedor> vendedores, ArrayList<Producto> productos,CalculadoraDeComision calculadoraComision) {
         this.vendedores = vendedores;
         this.productos = productos;
+        this.calculadoraComision = calculadoraComision;
     }
 
     public Tienda() {
@@ -55,31 +57,24 @@ public class Tienda {
          
          return productosFiltrados;
     }    
-  //con estrategia mejor
-  public Double calcularComision(Vendedor vendedor) {
-      Double comision = Double.valueOf(0);
-      Double valorTotalDeVentas = Double.valueOf(0);
-      
-      if(vendedor.getVentas().isEmpty())
-          return comision;
-      
-      for(Venta venta : vendedor.getVentas()){
-          valorTotalDeVentas += venta.getProducto().getPrecio();
-      }
-     
-      if(vendedor.getVentas().size()<=2)
-          comision = valorTotalDeVentas*0.05;
-      else
-          comision = valorTotalDeVentas * 0.1;
-      
-      return comision;
-          
-  }
+  
+    public ArrayList<Producto> getProductosPorPrecioMaximo(Float precioMaximo) {
+         ArrayList<Producto> productosFiltrados = new ArrayList<>();
+         
+         this.productos.forEach((producto) -> {
+             if(producto.getPrecio()<precioMaximo)
+                 productosFiltrados.add(producto);
+         });
+         
+         return productosFiltrados;
+    }    
+  
+   
   
  public  Map<Vendedor, Double>calcularComisiones(){
      Map<Vendedor, Double> comisiones = new HashMap<>();
      for(Vendedor vendedor : this.vendedores){
-         comisiones.put(vendedor, calcularComision(vendedor));
+         comisiones.put(vendedor, this.calculadoraComision.calcularComision(vendedor));
      }
      return comisiones;
  }

@@ -9,7 +9,7 @@ import ui.TiendaUI;
 
 /**
  *
- * @author zosima
+ * @author Santiago ponce
  */
 public class TiendaBesysoft {
 

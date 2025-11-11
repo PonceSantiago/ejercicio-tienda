@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author zosima
+ * @author Santiago Ponce
  */
 public class Vendedor {
     private String nombre;
