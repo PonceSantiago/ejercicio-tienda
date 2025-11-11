@@ -1,7 +1,7 @@
-*Deberá implementarse la funcionalidad básica de una tienda de productos:
+Deberá implementarse la funcionalidad básica de una tienda de productos:
 
 - Se podrán **almacenar** _productos_ (código, nombre, precio, categoría)
- vendedor (código,nombre, sueldo). LISTO
+ vendedor (código,nombre, sueldo). 
 
 - Al registrar una venta, se tendrá que relacionar el producto con el vendedor que realizo la
 venta. 

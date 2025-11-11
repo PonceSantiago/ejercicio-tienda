@@ -138,7 +138,7 @@ public class TiendaUI {
         if (resultados.isEmpty()) {
             printInfo("No se encontraron productos.");
         } else {
-            resultados.forEach(p -> printInfo(p.toString()));
+            resultados.forEach(p -> printInfo(p.getNombre()));
         }
     }
 
@@ -148,7 +148,7 @@ public class TiendaUI {
         if (lista.isEmpty()) {
             printInfo("No hay productos registrados.");
         } else {
-            lista.forEach(p -> printInfo(p.toString()));
+            lista.forEach(p -> printInfo(p.getNombre()));
         }
     }
 
