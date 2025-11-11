@@ -40,4 +40,38 @@ public class Tienda {
          
          return productosFiltrados;
     }    
+  //con estrategia mejor
+  public Double calcularComision(Vendedor vendedor) {
+      Double comision = Double.valueOf(0);
+      Double valorTotalDeVentas = Double.valueOf(0);
+      
+      if(vendedor.getVentas().isEmpty())
+          return comision;
+      
+      for(Venta venta : vendedor.getVentas()){
+          valorTotalDeVentas += venta.getProducto().getPrecio();
+      }
+     
+      if(vendedor.getVentas().size()<=2)
+          comision = valorTotalDeVentas*0.05;
+      else
+          comision = valorTotalDeVentas * 0.1;
+      
+      return comision;
+          
+  }
+  
+  public void almacenarProducto(Producto producto){
+      this.productos.add(producto);
+  }
+  
+  public void agregarVendedor(Vendedor vendedor){
+      this.vendedores.add(vendedor);
+  }
+  
+  public void registrarVenta(Producto producto, Vendedor vendedor){
+      Venta venta = new Venta(producto, vendedor);
+      vendedor.registrarVenta(venta);
+  }
+        
 }
