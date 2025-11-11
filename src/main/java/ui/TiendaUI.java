@@ -14,7 +14,7 @@ import com.mycompany.tiendabesysoft.InvalidProductDataException;
 import com.mycompany.tiendabesysoft.ProductNotFoundException;
 import com.mycompany.tiendabesysoft.Producto;
 import com.mycompany.tiendabesysoft.Tienda;
-import com.mycompany.tiendabesysoft.TiendaBesysoft;
+import com.mycompany.tiendabesysoft.Main;
 import com.mycompany.tiendabesysoft.Vendedor;
 import com.mycompany.tiendabesysoft.VendedorNotFoundException;
 
@@ -87,8 +87,10 @@ public class TiendaUI {
             case "registrar_venta" -> registrarVenta();
             case "comisiones" -> mostrarComisiones();
             case "buscar_categoria" -> buscarPorCategoria();
+            case "precio_max"-> buscarPorPrecioMax();
             case "listar" -> listarProductos();
             case "ayuda" -> mostrarAyuda();
+            case "vendedores" -> mostrarVendedores();
             default -> printError("Comando no reconocido. Escriba 'ayuda' para ver opciones.");
         }
     }
@@ -162,14 +164,42 @@ public class TiendaUI {
         }
     }
 
+        private void buscarPorPrecioMax() {
+        try {
+            printTitulo("Buscar productos por precio máximo");
+            String precio = reader.readLine("precio: ");
+            Float precioValue = Float.valueOf(precio);
+            
+            
+            List<Producto> resultados = tienda.buscarProductosPorPrecioMaximo(precioValue);
+            
+            if (resultados.isEmpty()) {
+                printInfo("No se encontraron productos.");
+            } else {
+                resultados.forEach(p -> printInfo(String.format("%s|$%.2f|%s",p.getNombre(),p.getPrecio(),p.getCodigo())));
+            }
+        } catch (InvalidDataException ex) {
+              printError("Error: " + ex.getMessage());
+        }
+    }
+        
     private void listarProductos() {
         printTitulo("Listado de productos");
+        printTitulo("Nombre - Precio - Código");
+
         List<Producto> lista = tienda.getProductos();
         if (lista.isEmpty()) {
             printInfo("No hay productos registrados.");
         } else {
-            lista.forEach(p -> printInfo(p.getNombre()));
+             lista.forEach(p -> printInfo(String.format("%s|$%.2f|%s",p.getNombre(),p.getPrecio(),p.getCodigo())));
         }
+    }
+    
+       private void mostrarVendedores() {
+        printInfo("Vendedores disponibles");
+        printTitulo("Nombre - Código");
+        this.tienda.getVendedores().forEach(vendedor -> printInfo(String.format("%s|%s",vendedor.getNombre(),vendedor.getCodigo())));
+      
     }
 
     private void mostrarAyuda() {
@@ -180,6 +210,8 @@ public class TiendaUI {
         printInfo("comisiones           → Calcular comisiones por vendedor");
         printInfo("buscar_categoria     → Buscar productos por categoría");
         printInfo("listar               → Mostrar todos los productos");
+        printInfo("vendedores           → Mostrar todos los vendedores");
+        printInfo("precio_max           → Buscar productos de precio inferior");
         printInfo("salir                → Salir del programa");
     }
 

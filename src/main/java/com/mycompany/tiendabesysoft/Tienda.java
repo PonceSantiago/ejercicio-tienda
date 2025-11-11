@@ -52,14 +52,17 @@ public class Tienda {
          ArrayList<Producto> productosFiltrados = new ArrayList<>();
          
          this.productos.forEach((producto) -> {
-             if(producto.getCategoria().equals(categoria))
+             if(producto.getCategoria().equalsIgnoreCase(categoria))
                  productosFiltrados.add(producto);
          });
          
          return productosFiltrados;
     }    
   
-    public ArrayList<Producto> buscarProductosPorPrecioMaximo(Float precioMaximo) {
+    public ArrayList<Producto> buscarProductosPorPrecioMaximo(Float precioMaximo) throws InvalidDataException {
+        if(precioMaximo<0)
+            throw new InvalidDataException();
+                 
          ArrayList<Producto> productosFiltrados = new ArrayList<>();
          
          this.productos.forEach((producto) -> {
@@ -72,7 +75,7 @@ public class Tienda {
   
      public Producto buscarProductoPorCodigo(String codigoProducto) throws ProductNotFoundException {
         for(Producto producto : this.productos) {
-            if(producto.getCodigo().equals(codigoProducto))
+            if(producto.getCodigo().equalsIgnoreCase(codigoProducto))
                 return producto;
         }
         
@@ -106,7 +109,7 @@ public class Tienda {
     public Vendedor buscarVendedorPorCodigo(String codVend) throws VendedorNotFoundException {
             
         for(Vendedor vendedor : this.vendedores) {
-            if(vendedor.getCodigo().equals(codVend))
+            if(vendedor.getCodigo().equalsIgnoreCase(codVend))
                 return vendedor;
         }
         
