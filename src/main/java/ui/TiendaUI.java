@@ -15,7 +15,6 @@ import com.mycompany.tiendabesysoft.TiendaBesysoft;
 import com.mycompany.tiendabesysoft.Vendedor;
 
 import java.io.IOException;
-import java.text.AttributedCharacterIterator;
 import org.jline.utils.AttributedString;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +28,6 @@ import org.jline.reader.impl.completer.StringsCompleter;
 import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;
 import org.jline.utils.AttributedStyle;
-
 
 public class TiendaUI {
     private final Tienda tienda;
@@ -53,7 +51,7 @@ public class TiendaUI {
     }
 
     public void iniciar() {
-        printTitulo("TIENDA INTERACTIVA - JLINE");
+        printTitulo("TIENDA INTERACTIVA");
         mostrarAyuda();
 
         String prompt = new AttributedString("tienda> ").toAnsi();
@@ -165,24 +163,35 @@ public class TiendaUI {
         printInfo("salir                → Salir del programa");
     }
 
-    // ==== MÉTODOS AUXILIARES CON COLOR ====
-    private void printTitulo(String texto) {
-        terminal.writer().println(texto);
+     private void printTitulo(String texto) {
+        terminal.writer().println(new AttributedString(
+                "\n=== " + texto.toUpperCase() + " ===",
+                AttributedStyle.DEFAULT.foreground(AttributedStyle.YELLOW | AttributedStyle.BRIGHT)
+        ).toAnsi());
         terminal.flush();
     }
 
     private void printOk(String texto) {
-    terminal.writer().println(new AttributedString(texto));
+        terminal.writer().println(new AttributedString(
+                "✔ " + texto,
+                AttributedStyle.DEFAULT.foreground(AttributedStyle.GREEN)
+        ).toAnsi());
         terminal.flush();
     }
 
     private void printInfo(String texto) {
-    terminal.writer().println(new AttributedString(texto));
+        terminal.writer().println(new AttributedString(
+                texto,
+                AttributedStyle.DEFAULT.foreground(AttributedStyle.CYAN)
+        ).toAnsi());
         terminal.flush();
     }
 
     private void printError(String texto) {
-    terminal.writer().println(new AttributedString(texto));
+        terminal.writer().println(new AttributedString(
+                "✖ " + texto,
+                AttributedStyle.DEFAULT.foreground(AttributedStyle.RED)
+        ).toAnsi());
         terminal.flush();
     }
 }
