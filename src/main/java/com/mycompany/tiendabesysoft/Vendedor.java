@@ -9,5 +9,7 @@ package com.mycompany.tiendabesysoft;
  * @author zosima
  */
 public class Vendedor {
-    
+    private String nombre;
+    private Float sueldo;
+    private String codigo;
 }

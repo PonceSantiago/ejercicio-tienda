@@ -1,7 +1,8 @@
 *Deberá implementarse la funcionalidad básica de una tienda de productos:
 
-- Se podrán **almacenar** _productos_ (código, nombre, precio, categoría), vendedor (código,
-nombre, sueldo).
+- Se podrán **almacenar** _productos_ (código, nombre, precio, categoría)
+ vendedor (código,nombre, sueldo).
+
 - Al registrar una venta, se tendrá que relacionar el producto con el vendedor que realizo la
 venta.
 - Se debe de poder calcular la comisión de ventas por cada vendedor, el cual se obtiene de un
@@ -12,3 +13,23 @@ categoría.
 - La aplicación tendrá que implementar el manejo de excepciones correctamente.
 - Deberá diseñarse un Diagrama de Entidad Relación para la solución.
 - Deberá ejecutarse por consola y se almacenarán los datos en memoria.
+
+
+
+
+Entidades 
+-Tienda
+-Producto
+-Vendedor
+
+El calculo de la comision deberia hacerse mediante una 
+estrategia, usar patron
+
+Principios de Diseño
+
+S
+O
+L
+I
+D
+
