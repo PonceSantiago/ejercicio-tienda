@@ -6,7 +6,7 @@ package com.mycompany.tiendabesysoft;
 
 /**
  *
- * @author zosima
+ * @author Ponce Santiago
  */
 public class VendedorNotFoundException extends Exception {
 

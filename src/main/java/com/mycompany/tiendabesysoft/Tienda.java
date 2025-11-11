@@ -93,11 +93,19 @@ public class Tienda {
       
   
   
-  public void almacenarProducto(Producto producto){
+  public void almacenarProducto(Producto producto) throws ProductoDuplicadoException{
+          for(Producto p:this.productos){
+          if(p.getCodigo().equalsIgnoreCase(p.getCodigo()))
+              throw new ProductoDuplicadoException();
+      }
       this.productos.add(producto);
   }
   
-  public void agregarVendedor(Vendedor vendedor){
+  public void agregarVendedor(Vendedor vendedor) throws VendedorDuplicadoException{
+      for(Vendedor v:this.vendedores){
+          if(v.getCodigo().equalsIgnoreCase(vendedor.getCodigo()))
+              throw new VendedorDuplicadoException();
+      }
       this.vendedores.add(vendedor);
   }
   

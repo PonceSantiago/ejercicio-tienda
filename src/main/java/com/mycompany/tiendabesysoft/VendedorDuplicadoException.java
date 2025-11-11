@@ -8,14 +8,14 @@ package com.mycompany.tiendabesysoft;
  *
  * @author Ponce Santiago
  */
-public class InvalidDataException extends Exception {
+public class VendedorDuplicadoException extends Exception {
 
-    public InvalidDataException() {
+    public VendedorDuplicadoException() {
     }
 
     @Override
     public String getMessage() {
-        return "Error:Datos invalidos";
+        return "Vendedor con código ya utilizado";
     }
     
     

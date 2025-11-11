@@ -15,7 +15,9 @@ import com.mycompany.tiendabesysoft.ProductNotFoundException;
 import com.mycompany.tiendabesysoft.Producto;
 import com.mycompany.tiendabesysoft.Tienda;
 import com.mycompany.tiendabesysoft.Main;
+import com.mycompany.tiendabesysoft.ProductoDuplicadoException;
 import com.mycompany.tiendabesysoft.Vendedor;
+import com.mycompany.tiendabesysoft.VendedorDuplicadoException;
 import com.mycompany.tiendabesysoft.VendedorNotFoundException;
 
 import java.io.IOException;
@@ -105,7 +107,7 @@ public class TiendaUI {
             
             tienda.almacenarProducto(new Producto(nombre,precio , categoria, codigo));
             printOk("Producto agregado correctamente.");
-        } catch (InvalidProductDataException ex) {
+        } catch (InvalidProductDataException |ProductoDuplicadoException ex) {
               printError("Error: " + ex.getMessage());
         }
     }
@@ -119,7 +121,7 @@ public class TiendaUI {
             
             tienda.agregarVendedor(new Vendedor(nombre, sueldo,codigo));
             printOk("Vendedor registrado.");
-        } catch (InvalidDataException ex) {
+        } catch (InvalidDataException |VendedorDuplicadoException ex) {
               printError("Error: " + ex.getMessage());
         }
     }

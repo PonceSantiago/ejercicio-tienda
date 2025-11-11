@@ -14,7 +14,7 @@ import ui.TiendaUI;
  */
 public class Main {
 
-    public static void main(String[] args) throws IOException, InvalidDataException, InvalidProductDataException {
+    public static void main(String[] args) throws IOException, InvalidDataException, InvalidProductDataException, VendedorDuplicadoException, ProductoDuplicadoException {
         
         
        Tienda tienda = new Tienda();
